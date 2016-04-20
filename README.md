@@ -1,0 +1,3 @@
+# Dynamic Layout Manager for recycler views.
+
+Work In Progress.... 
