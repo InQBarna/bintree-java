@@ -399,16 +399,16 @@ public class CellNode<T> {
             visited = new HashSet<>(256);
             this.stopPoint = stopPoint;
             this.skipEmpty = skipEmpty;
-            if (null != stopPoint && initial == stopPoint) {
-                current = null;
-            } else {
-                advanceToNext(initial);
-            }
+            advanceToNext(initial);
         }
 
         private void advanceToNext(@Nullable CellNode<T> initial) {
             if (null != initial) {
                 current = initial;
+                if (null != stopPoint && stopPoint == current) {
+                    current = null;
+                    return;
+                }
             }
 
             if (current.left != null && !visited.contains(current.left()) && !current.leftThread) {
@@ -416,12 +416,17 @@ public class CellNode<T> {
                 while (current.left != null && !current.leftThread && !visited.contains(current.left())) {
                     current = current.left();
                     visited.add(current);
+                    if (null != stopPoint && current == stopPoint) {
+                        break;
+                    }
                 }
             } else if (null == initial) {
                 if (current.rightThread) {
                     visited.add(current.right());
+                    current = current.right();
+                } else {
+                    advanceToNext(current.right());
                 }
-                current = current.right();
             } else {
                 visited.add(initial);
             }

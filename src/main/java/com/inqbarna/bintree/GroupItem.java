@@ -7,9 +7,9 @@ import java.util.List;
  * @version 1.0 31/1/17
  */
 
-public interface LinearItem<T> extends Expandable<T> {
+public interface GroupItem<T> extends Expandable<T> {
     T dataContent();
 
     @Override
-    List<? extends LinearItem<T>> childBlocks();
+    List<? extends GroupItem<T>> childBlocks();
 }

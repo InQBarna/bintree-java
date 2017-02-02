@@ -14,14 +14,14 @@ import java.util.Queue;
  */
 
 public class Trees {
-    public static <T> CellNode<T> fromBlock(@NotNull LinearItem<T> block) {
+    public static <T> CellNode<T> fromBlock(@NotNull GroupItem<T> block) {
         return fromBlocks(Collections.singletonList(block));
     }
 
-    public static <T> CellNode<T> fromBlocks(@NotNull Collection<? extends LinearItem<T>> blocks) {
+    public static <T> CellNode<T> fromBlocks(@NotNull Collection<? extends GroupItem<T>> blocks) {
         CellNode<T> root = null;
 
-        for (LinearItem<T> block : blocks) {
+        for (GroupItem<T> block : blocks) {
             root = setNextBlock(root, block);
         }
 
@@ -29,7 +29,7 @@ public class Trees {
     }
 
 
-    private static <T> CellNode<T> setNextBlock(CellNode<T> root, @NotNull LinearItem<T> block) {
+    private static <T> CellNode<T> setNextBlock(CellNode<T> root, @NotNull GroupItem<T> block) {
         return setNextBlock(root, nodeFromBlock(block));
     }
 
@@ -48,15 +48,15 @@ public class Trees {
         return root;
     }
 
-    static <T> CellNode<T> nodeFromBlock(@NotNull LinearItem<T> block) {
+    static <T> CellNode<T> nodeFromBlock(@NotNull GroupItem<T> block) {
         CellNode<T> me = new CellNode<>();
         me.setData(block.dataContent());
 
-        List<? extends LinearItem<T>> childs = block.childBlocks();
+        List<? extends GroupItem<T>> childs = block.childBlocks();
         CellNode<T> left = null;
         if (null != childs && !childs.isEmpty()) {
-            Queue<LinearItem<T>> rightElementBlocks = new LinkedList<>();
-            for (LinearItem<T> childBlock : childs) {
+            Queue<GroupItem<T>> rightElementBlocks = new LinkedList<>();
+            for (GroupItem<T> childBlock : childs) {
                 if (null == left) {
                     left = nodeFromBlock(childBlock);
                     me.left(left);
@@ -70,8 +70,8 @@ public class Trees {
         return me;
     }
 
-    private static <T> void processRightBlocks(CellNode<T> prev, Queue<? extends LinearItem<T>> rightElementBlocks) {
-        LinearItem<T> poll = rightElementBlocks.poll();
+    private static <T> void processRightBlocks(CellNode<T> prev, Queue<? extends GroupItem<T>> rightElementBlocks) {
+        GroupItem<T> poll = rightElementBlocks.poll();
         if (null != poll) {
             CellNode<T> right = nodeFromBlock(poll);
             prev.right(right);
