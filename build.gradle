@@ -2,6 +2,8 @@ apply plugin: 'java'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile group: 'org.jetbrains', name: 'annotations-java5', version: '15.0'
+
 }
 
 sourceCompatibility = "1.7"
