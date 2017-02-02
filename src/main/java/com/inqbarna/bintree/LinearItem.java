@@ -7,7 +7,7 @@ import java.util.List;
  * @version 1.0 31/1/17
  */
 
-public interface LinearItem<T> extends Unfoldable<T> {
+public interface LinearItem<T> extends Expandable<T> {
     T dataContent();
 
     @Override

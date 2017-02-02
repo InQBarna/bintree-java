@@ -7,6 +7,6 @@ import java.util.List;
  * @version 1.0 31/1/17
  */
 
-public interface Unfoldable<T> {
-    List<? extends Unfoldable<T>> childBlocks();
+public interface Expandable<T> {
+    List<? extends Expandable<T>> childBlocks();
 }
