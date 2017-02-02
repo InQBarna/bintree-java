@@ -1,3 +1,3 @@
-# Dynamic Layout Manager for recycler views.
+# Java Binary Tree implementation
 
 Work In Progress.... 
